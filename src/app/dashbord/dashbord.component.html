@@ -1,0 +1,201 @@
+<div class="container-fluide page">
+    <div class="page_box p-3 mt-2">Dashboard</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="page_content-data position-absolute text-center">
+            <!-- Vision par Tickets des Évolutions -->
+            <!-- <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                Vision des Tickets des Evolutions
+                <hr>
+                <br>
+                <table class="table mt-3">
+                    <tbody>
+                      <tr style="background-color:#7FFFD4;">
+                        <th>Totaux</th>
+                        <td>Nb</td>
+                        <td>%</td>
+
+                    
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Tickets Total</th>
+                        <td>51</td>
+                        <td>100</td>
+                        
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Tickets Couverts</th>
+                        <td>1</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Ok</th>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">KO</th>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Non testés</th>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Abandonnés</th>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <th style="background-color:#7FFFD4;">Hors Périmètre</th>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+            </div>
+
+            <hr>
+            
+        </div>
+        <br>  
+        <div class="row">
+          <div class="col-sm-8">
+              Vision par Cas de Test
+              <hr>
+              <br>
+              <table class="table mt-3">
+                  <tbody>
+                    <tr style="background-color:#FFEBCD;">
+                      <th>Totaux</th>
+                      <td>Nb</td>
+                      <td>%</td>
+
+                  
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">Cas de test total</th>
+                      <td>51</td>
+                      <td>100</td>
+                      
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">Cas de Test lié à un ticket</th>
+                      <td>1</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">Ok</th>
+                      <td>0</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">KO</th>
+                      <td>0</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">A exécuter</th>
+                      <td>0</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <th style="background-color:#FFEBCD;">Abandonnés</th>
+                      <td>0</td>
+                      <td>0</td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-sm-4">
+            <br>
+              <p-chart type="doughnut" [data]="dataTest" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+          </div>
+
+          <hr>
+          
+          <div class="container">
+            <div class="mt-2">
+              <h2 style="text-align: center;">Gestion des Anomalies</h2>
+              <table class="table table-bordered border-primary">
+                <tr>
+                  <td rowspan="2" style="font-size: 13px; background-color: #C0C0C0; font-weight: bold;">
+                    Sévérité   
+                  </td>
+                  <td colspan="3" style="text-align: center;" style="font-size: 13px; background-color: #C0C0C0; font-weight: bold;">
+                    En Cours
+                  </td>
+                  <td colspan="5" style="text-align: center; font-size: 13px; background-color: #C0C0C0; font-weight: bold;">
+                    Clôturées
+                  </td>
+                  <td style="background-color: #C0C0C0;"></td>
+                 </tr>
+                 <tr>
+                  
+                    <td style="font-size: 13px; background-color: #FFDEAD;text-align: center;">A traiter</td>
+                    <td style="font-size: 13px; background-color: #FFDEAD;text-align: center;">Corriger</td>
+                    <td style="font-size: 13px; background-color: #FFDEAD;text-align: center;">Vérification</td>
+
+                    <td style="font-size: 13px; background-color: #7FFFD4;text-align: center;">Validation Correctif(s)</td>
+                    <td style="font-size: 13px; background-color: #7FFFD4;text-align: center;">Rejetées faux problèmes</td>
+                    <td style="font-size: 13px; background-color: #7FFFD4;text-align: center;">RejetéesProblèmes d'environnements</td>
+                    <td style="font-size: 13px; background-color: #7FFFD4;text-align: center;">Problèmes de documentation</td>
+                    <td style="font-size: 13px; background-color: #7FFFD4;text-align: center;">Arbitrage projet et évolution </td>
+                    <td style="font-size: 13px; background-color: #C0C0C0;text-align: center; font-weight: bold;">Total</td>
+
+                 </tr>
+
+                 <tr>
+                  <td style="font-size: 15px;">Bloquante</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #C0C0C0;text-align: center;">0</td>
+                 </tr>
+
+                <tr>
+                  <td style="font-size: 15px;">Majeur</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #C0C0C0;text-align: center;">0</td>
+                </tr>
+
+                <tr>
+                  <td style="font-size: 15px;">Mineur</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #FFDEAD;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #7FFFD4;text-align: center;">0</td>
+                  <td style="font-size: 15px; background-color: #C0C0C0; text-align: center;">0</td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    
+</div>

@@ -1,0 +1,231 @@
+<div class="container-fluide page">
+    <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="page_content-data position-absolute text-center"></div>
+          
+        
+        <div class="container">
+            <div class="mt-2">
+                <mat-stepper [linear]="isLinear"  #stepper>
+
+                    <mat-step [stepControl]="FormGroup1" >
+                        <ng-template matStepLabel>Release</ng-template>
+                        <form [formGroup]="FormGroup1" class="mt-4">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Numéro Release</mat-label>
+                                <input matInput placeholder="2015075AI" formControlName="releaseNumRelease" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Choisir Date Livraison</mat-label>
+                                <input matInput [matDatepicker]="picker1" formControlName="releaseDateLivraison" required>
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Choisir Date Prévision</mat-label>
+                                <input matInput [matDatepicker]="picker2" formControlName="releaseDatePrevision" required>
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Choisir Date Réelle</mat-label>
+                                <input matInput [matDatepicker]="picker3" formControlName="releaseDateReelle" required>
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                            </mat-form-field>
+                        </form>
+                        <mat-toolbar style="background-color: white;">
+                            <span class="example-spacer"></span>
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" matStepperNext>
+                                <mat-icon>keyboard_arrow_right</mat-icon>Suivant
+                            </button>
+                        </mat-toolbar>
+                    </mat-step>
+        
+
+                    <mat-step [stepControl]="FormGroup2">
+    
+                        <ng-template matStepLabel>Ticket</ng-template>
+                        <form [formGroup]="FormGroup2" class="mt-4">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Référence Ticket</mat-label>
+                                <input matInput placeholder="REF001" formControlName="ticketRefTicket" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Titre Ticket</mat-label>
+                                <input matInput placeholder="Titre 1" formControlName="ticketTitreTicket" required>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="ticketType" required>
+                                  <mat-option value="Anomalie">Anomalie</mat-option>
+                                  <mat-option value="Evolution">Evolution</mat-option>
+                                  <mat-option value="Incident">Incident</mat-option>
+                                  <mat-option value="Recit">Recit</mat-option>
+                                  <mat-option value="Hors Release">Hors Release</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Testeur</mat-label>
+                                <mat-select formControlName="ticketTesteur" required>
+                                  <mat-option value=""></mat-option>
+                                  <mat-option *ngFor="let testeur of listTesteur" value="{{testeur.id}}">{{testeur.testeurPrenom}} {{testeur.testeurNom}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </form>
+                        <mat-toolbar style="background-color: white;">
+                            <span class="example-spacer"></span>
+                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
+                                <mat-icon>keyboard_arrow_left</mat-icon>Retour
+                            </button> | 
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" matStepperNext>
+                                Suivant<mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </mat-toolbar>
+                    </mat-step>
+        
+                    <mat-step [stepControl]="FormGroup6" optional>
+                        <ng-template matStepLabel>Test</ng-template>
+                        <form [formGroup]="FormGroup6" class="mt-3">
+                            <h2 style="text-align: center;">Cas De Test</h2>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Référence Cas</mat-label>
+                                <input matInput placeholder="2015075AI">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Resultat</mat-label>
+                                <mat-select >
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="En Cours">En Cours</mat-option>
+                                  <mat-option value="OK">OK</mat-option>
+                                  <mat-option value="KO">KO</mat-option>
+                                  <mat-option value="Bloquee">Bloquée</mat-option>
+                                  <mat-option value="Abandonnes">Abandonnée</mat-option>
+                                  <mat-option value="Nonteste">Non testée</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            
+                            <h2 style="text-align: center;">Scénario Test</h2>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Référence Scénario</mat-label>
+                                <input matInput placeholder="2015075AI">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Resultat</mat-label>
+                                <mat-select>
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="En Cours">En Cours</mat-option>
+                                  <mat-option value="OK">OK</mat-option>
+                                  <mat-option value="KO">KO</mat-option>
+                                  <mat-option value="Bloquee">Bloquée</mat-option>
+                                  <mat-option value="Abandonnes">Abandonnée</mat-option>
+                                  <mat-option value="Nonteste">Non testée</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </form>
+                        <mat-toolbar style="background-color: white;">
+                            <span class="example-spacer"></span>
+                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
+                                <mat-icon>keyboard_arrow_left</mat-icon>Retour
+                            </button> | 
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" matStepperNext>
+                                Suivant<mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </mat-toolbar>
+                    </mat-step>
+        
+                   
+        
+                    <mat-step optional>
+                        <ng-template matStepLabel>Anomalie</ng-template>
+                        <form [formGroup]="FormGroup5" class="mt-4">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Référence Anomalie</mat-label>
+                                <input matInput placeholder="2015075AI" >
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Titre Anomalie</mat-label>
+                                <input matInput placeholder="2015075AI">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Criticité</mat-label>
+                                <mat-select>
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="Bloquante">Bloquante</mat-option>
+                                  <mat-option value="Majeur">Majeur</mat-option>
+                                  <mat-option value="Mineur">Mineur</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Motif</mat-label>
+                                <mat-select >
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="Corrige">Corrigé</mat-option>
+                                  <mat-option value="Evolution">Evolution</mat-option>
+                                  <mat-option value="Test">Test</mat-option>
+                                  <mat-option value="MOA">Acceptée en l'état MOA</mat-option>
+                                  <mat-option value="MOE">Arbitrage MOE</mat-option>
+                                  <mat-option value="Entrantdocumentaire">Entrant documentaire</mat-option>
+                                  <mat-option value="OutilsJDD">Outils environnement JDD  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Statut</mat-label>
+                                <mat-select >
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="En Cours">Ouverte</mat-option>
+                                  <mat-option value="Resolue">Résolue</mat-option>
+                                  <mat-option value="Qualification">Qualification</mat-option>
+                                  <mat-option value="Fermee">Fermée</mat-option>
+                                  <mat-option value="Cloturee">Cloturée</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Priorité</mat-label>
+                                <mat-select >
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="Standard">Standard</mat-option>
+                                  <mat-option value="Enurgence">En urgence</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </form>
+                        <mat-toolbar style="background-color: white;"> 
+                            <span class="example-spacer"></span>
+                            <button  mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
+                                <mat-icon>keyboard_arrow_left</mat-icon>Retour
+                            </button> | 
+                            <!-- <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addManager()">
+                                Autre Ticket<mat-icon>add</mat-icon>
+                            </button> |  -->
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addManager()">
+                                Envoyer<mat-icon>check</mat-icon>
+                            </button>
+                        </mat-toolbar>
+                    </mat-step>
+                    
+                </mat-stepper>
+            </div>
+        </div>
+    </div>
+    
+</div>
