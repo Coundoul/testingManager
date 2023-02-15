@@ -12,25 +12,23 @@ import { DialogComponent } from 'src/app/entities/testeur/dialog/dialog.componen
 export class DialogEditComponent implements OnInit{
   
   FormGroup1 = this._formBuilder.group({
-    releaseNumRelease: ['', Validators.required],
-    releaseDateLivraison: ['', Validators.required],
-    releaseDatePrevision: ['', Validators.required],
-    releaseDateReelle: ['', Validators.required]
+    dateLivraison: ['', Validators.required],
+    datePrevision: ['', Validators.required],
+    dateReelle: ['', Validators.required]
   });
   constructor(@Inject(MAT_DIALOG_DATA) public editData : any, 
   private dialogRef : MatDialogRef<DialogComponent>, private releaseService: ReleaseService, private _formBuilder: FormBuilder){}
 
   ngOnInit(): void {
-
-    this.FormGroup1.controls['releaseNumRelease'].setValue(this.editData.releaseNumRelease);
-    this.FormGroup1.controls['releaseDateLivraison'].setValue(this.editData.releaseDateLivraison);
-    this.FormGroup1.controls['releaseDatePrevision'].setValue(this.editData.releaseDatePrevision);
-    this.FormGroup1.controls['releaseDateReelle'].setValue(this.editData.releaseDateReelle);
-    
+    if(this.editData){
+      this.FormGroup1.controls['dateLivraison'].setValue(this.editData.dateLivraison);
+      this.FormGroup1.controls['datePrevision'].setValue(this.editData.datePrevision);
+      this.FormGroup1.controls['dateReelle'].setValue(this.editData.dateReelle);
+    }
   }
 
   updateRelease(){
-    this.releaseService.putRelease(this.FormGroup1.value, this.editData.id)
+    this.releaseService.putRelease(this.FormGroup1.value, this.editData.refRelease)
     .subscribe({
       next:(res)=>{
         alert("Release Modifier avec Succes");

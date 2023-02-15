@@ -4,18 +4,19 @@
     <form action="" [formGroup]="testeurForm">
         <mat-form-field class="example-full-width">
             <mat-label>Matricule</mat-label>
-            <input matInput placeholder="2015075AI" value="" formControlName="testeurMatricule" required>
+            <input matInput placeholder="2015075AI" name="matricule" id="matricule" formControlName="matricule">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Ex. Coundoul"  formControlName="nom" required>
+      </mat-form-field>
+
+        <mat-form-field class="example-full-width">
           <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Ex. Ousseynou" value="" formControlName="testeurPrenom" required>
+          <input matInput placeholder="Ex. Ousseynou"  formControlName="prenom" required>
         </mat-form-field>
     
-        <mat-form-field class="example-full-width">
-            <mat-label>Nom</mat-label>
-            <input matInput placeholder="Ex. Coundoul" value="" formControlName="testeurNom" required>
-        </mat-form-field>
     </form>
 
 </mat-dialog-content>

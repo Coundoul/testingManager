@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class TesteurComponent implements OnInit, AfterViewInit{
   title = 'Liste Des Testeurs'
-  displayedColumns: string[] = ['id', 'testeurMatricule', 'testeurPrenom', 'testeurNom', 'action'];
+  displayedColumns: string[] = ['idTesteur', 'matricule', 'prenom', 'nom', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;

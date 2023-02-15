@@ -2,14 +2,10 @@
 
 <mat-dialog-content class="mat-typography">
     <form action="" [formGroup]="FormGroup1">
-        <mat-form-field class="example-full-width">
-            <mat-label>Numéro Release</mat-label>
-            <input matInput placeholder="2015075AI" value="" formControlName="releaseNumRelease" required>
-        </mat-form-field>
 
         <mat-form-field class="example-full-width">
           <mat-label>Date Livraison</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="releaseDateLivraison" required>
+          <input matInput [matDatepicker]="picker1" formControlName="dateLivraison" required>
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -17,7 +13,7 @@
     
         <mat-form-field class="example-full-width">
             <mat-label>Date Prévision</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="releaseDatePrevision" required>
+            <input matInput [matDatepicker]="picker2" formControlName="datePrevision" required>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
@@ -25,7 +21,7 @@
 
         <mat-form-field class="example-full-width">
             <mat-label>Date Réelle</mat-label>
-            <input matInput [matDatepicker]="picker3" formControlName="releaseDateReelle" required>
+            <input matInput [matDatepicker]="picker3" formControlName="dateReelle" required>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>

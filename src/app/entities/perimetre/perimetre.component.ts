@@ -18,7 +18,7 @@ import { DialogEditComponent } from './dialog/dialog-edit/dialog-edit.component'
 })
 export class PerimetreComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'numRelease', 'releaseDateLivraison', 'releaseDatePrevision','releaseDateReelle', 'action'];
+  displayedColumns: string[] = ['refRelease', 'dateLivraison', 'datePrevision','dateReelle', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
@@ -56,7 +56,7 @@ export class PerimetreComponent implements OnInit{
         this.dataSource.sort = this.sort;
       },
       error:(_err)=>{
-        alert("Impossible de recupere la liste des anomalies!!!")
+        alert("Impossible de recupere la liste des releases!!!")
       }
     })
   }

@@ -9,22 +9,22 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   postTicket(data : any){
-    return this.http.post<any>("http://localhost:3000/ticket/", data);
+    return this.http.post<any>("http://localhost:9092/ticketManager", data);
   }
 
   getAllTicket(){
-    return this.http.get<any>("http://localhost:3000/ticket/");
+    return this.http.get<any>("http://localhost:9092/ticketManager");
   }
 
   getTicket(id:number){
-    return this.http.get<any>("http://localhost:3000/ticket/"+id);
+    return this.http.get<any>("http://localhost:9092/ticketManager/"+id);
   }
 
   putTicket(data : any, id : number){
-    return this.http.put<any>("http://localhost:3000/ticket/"+id, data);
+    return this.http.put<any>("http://localhost:9092/ticketManager/"+id, data);
   }
 
   deleteTicket(id : number){
-    return this.http.delete<any>("http://localhost:3000/ticket/"+id);
+    return this.http.delete<any>("http://localhost:9092/ticketManager/"+id);
   }
 }

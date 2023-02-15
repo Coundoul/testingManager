@@ -20,15 +20,15 @@ export class DialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.testeurForm = this.formBuilder.group({
-      testeurMatricule: ['', Validators.required],
-      testeurPrenom: ['', Validators.required],
-      testeurNom: ['', Validators.required],
+      matricule: [],
+      prenom: ['', Validators.required],
+      nom: ['', Validators.required],
     });
     if(this.editData){
       this.actionBtn="Modifier";
-      this.testeurForm.controls['testeurMatricule'].setValue(this.editData.testeurMatricule);
-      this.testeurForm.controls['testeurPrenom'].setValue(this.editData.testeurPrenom);
-      this.testeurForm.controls['testeurNom'].setValue(this.editData.testeurNom);
+      this.testeurForm.controls['matricule'].setValue(this.editData.matricule);
+      this.testeurForm.controls['prenom'].setValue(this.editData.prenom);
+      this.testeurForm.controls['nom'].setValue(this.editData.nom);
     }
   }
 
@@ -53,7 +53,7 @@ export class DialogComponent implements OnInit{
   }
 
   updateTesteur(){
-    this.testeurService.putTesteur(this.testeurForm.value, this.editData.id)
+    this.testeurService.putTesteur(this.testeurForm.value, this.editData.idTesteur)
     .subscribe({
       next:(res)=>{
         alert("Testeur Modifier avec Succes");

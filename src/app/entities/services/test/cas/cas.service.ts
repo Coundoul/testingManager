@@ -9,18 +9,18 @@ export class CasService {
   constructor(private http: HttpClient) { }
 
   postCasTest(data : any){
-    return this.http.post<any>("http://localhost:3000/casTest/", data);
+    return this.http.post<any>("http://localhost:9092/casTestManager", data);
   }
 
   getAllCasTest(){
-    return this.http.get<any>("http://localhost:3000/casTest/");
+    return this.http.get<any>("http://localhost:9092/casTestManager");
   }
 
   putCasTest(data : any, id : number){
-    return this.http.put<any>("http://localhost:3000/casTest/"+id, data);
+    return this.http.put<any>("http://localhost:9092/casTestManager/"+id, data);
   }
 
   deleteCasTest(id : number){
-    return this.http.delete<any>("http://localhost:3000/casTest/"+id);
+    return this.http.delete<any>("http://localhost:9092/casTestManager/"+id);
   }
 }

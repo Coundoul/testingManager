@@ -2,26 +2,24 @@ import { Type } from "../enum/Type.model";
 
 
 export interface ITesteur {
-    id?: number;
-    testeurMatricule?: string;
-    testeurPrenom?: string;
-    testeurNom?: string;
+    idTesteur?: number;
+    matricule?: string;
+    prenom?: string;
+    nom?: string;
 }
 
 export interface IRelease {
-  id?: number;
-  releaseNumRelease?: string;
-  releaseDateLivraison?: Date;
-  releaseDatePrevision?: Date;
-  releaseDateReelle?: Date;
+  refRelease?: number;
+  dateLivraison?: Date;
+  datePrevision?: Date;
+  dateReelle?: Date;
 }
 
 export interface ITicket {
-  id?: number;
-  ticketRefTicket?: string;
-  ticketTitreTicket?: string;
-  ticketType?: Type;
-  ticketTesteur?: ITesteur | null;
+  refTicket?: number;
+  titre?: string;
+  type?: Type;
+  testeur?: ITesteur | null;
 }
 
 
@@ -29,25 +27,25 @@ export interface ITicket {
 
   
 export class Testeur implements ITesteur {
-  constructor(public id?: number, public testeurMatricule?: string, public testeurPrenom?: string, public testeurNom?: string) {}
+  constructor(public idTesteur?: number, public matricule?: string, public prenom?: string, public nom?: string) {}
 }
   
 export function getTesteurIdentifier(testeur: ITesteur): number | undefined {
-  return testeur.id;
+  return testeur.idTesteur;
 }
 
 export class Release implements IRelease {
-  constructor(public id?: number, public releaseNumRelease?: string, public releaseDateLivraison?: Date, public releaseDatePrevision?: Date, public releaseDateReelle?: Date) {}
+  constructor(public refRelease?: number, public dateLivraison?: Date, public datePrevision?: Date, public dateReelle?: Date) {}
 }
   
 export function getReleaseIdentifier(release: IRelease): number | undefined {
-  return release.id;
+  return release.refRelease;
 }
 
 export class Ticket implements ITicket {
-  constructor(public id?: number, public ticketRefTicket?: string, public ticketTitreTicket?: string, public ticketType?: Type, public ticketTesteur?: ITesteur | null) {}
+  constructor(public refTicket?: number, public titre?: string, public type?: Type, public Testeur?: ITesteur | null) {}
 }
   
 export function getTicketIdentifier(ticket: ITicket): number | undefined {
-  return ticket.id;
+  return ticket.refTicket;
 }

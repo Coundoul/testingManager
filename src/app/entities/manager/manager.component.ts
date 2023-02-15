@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -29,47 +29,40 @@ export class ManagerComponent implements OnInit{
 
   
   FormGroup1 = this._formBuilder.group({
-    releaseNumRelease: ['', Validators.required],
-    releaseDateLivraison: ['', Validators.required],
-    releaseDatePrevision: ['', Validators.required],
-    releaseDateReelle: ['', Validators.required]
+    dateLivraison: ['', Validators.required],
+    datePrevision: ['', Validators.required],
+    dateReelle: ['', Validators.required]
   });
 
   FormGroup2 = this._formBuilder.group({
-    ticketRefTicket: ['', Validators.required],
-    ticketTitreTicket: ['', Validators.required],
-    ticketType: ['', Validators.required],
-    ticketTesteur: ['', Validators.required],
+    titre: ['', Validators.required],
+    type: ['', Validators.required],
+    testeur: new FormControl(null),
     release: []
   });
 
   FormGroup3 = this._formBuilder.group({
-    casRefCas: [null, Validators.required],
-    casResutat: [null, Validators.required],
+    resutat: [null, Validators.required],
     ticket: [],
   });
 
   FormGroup4 = this._formBuilder.group({
-    scenarioRefScenario: [null, Validators.required],
     scenario: [null, Validators.required],
     casTest: []
 
   });
   FormGroup5 = this._formBuilder.group({
-    anomalieRefAnomalie: [null, Validators.required],
-    anomalieTitre: [null, Validators.required],
-    anomalieCriticite: [null, Validators.required],
-    anomalieMotif: [null, Validators.required],
-    anomalieStatut: [null, Validators.required],
-    anomaliePriorite: [null, Validators.required],
+    criticite: [null, Validators.required],
+    priorite: [null, Validators.required],
+    statut: [null, Validators.required],
+    enCours: [null, Validators.required],
+    cloturee: [null, Validators.required],
     ticket:[]
   });
   
   FormGroup6 = this._formBuilder.group({
-    casRefCas: [null, Validators.required],
-    casResutat: [null, Validators.required],
-    scenarioRefScenario: [null, Validators.required],
-    scenarioResultat: [null, Validators.required],
+    resutat: [null, Validators.required],
+    scenario: [null, Validators.required]
   });
   
   isLinear = false;
@@ -123,24 +116,22 @@ export class ManagerComponent implements OnInit{
               this.ticketService.postTicket(this.FormGroup2.value)
               .subscribe({
                 next:(res2)=>{
-                  this.FormGroup3.value.casRefCas=this.FormGroup6.value.casRefCas;
-                  this.FormGroup3.value.casResutat=this.FormGroup6.value.casResutat;
+                  this.FormGroup3.value.resutat=this.FormGroup6.value.resutat;
                   this.FormGroup3.value.ticket=res2;
-                  if(this.FormGroup3.value.casRefCas!==null && this.FormGroup3.value.casResutat!==null){
+                  if(this.FormGroup3.value.resutat!==null){
                     this.casTestService.postCasTest(this.FormGroup3.value)
                     .subscribe({
                       next:(res3)=>{
-                        this.FormGroup4.value.scenarioRefScenario=this.FormGroup6.value.scenarioRefScenario
-                        this.FormGroup4.value.scenario=this.FormGroup6.value.scenarioResultat;
+                        this.FormGroup4.value.scenario=this.FormGroup6.value.scenario;
                         this.FormGroup4.value.casTest=res3;
                         if(this.FormGroup4.value!==null && this.FormGroup4.value!==null){
                           this.scenarioService.postScenario(this.FormGroup4.value)
                           .subscribe({
                             next:(_res4)=>{
                             this.FormGroup5.value.ticket=res2;
-                            if(this.FormGroup5.value.anomalieCriticite!==null && this.FormGroup5.value.anomalieMotif!==null &&
-                              this.FormGroup5.value.anomaliePriorite!==null && this.FormGroup5.value.anomalieRefAnomalie!==null && 
-                              this.FormGroup5.value.anomalieStatut!==null && this.FormGroup5.value.anomalieTitre!==null){
+                            if(this.FormGroup5.value.criticite!==null && this.FormGroup5.value.priorite!==null &&
+                              this.FormGroup5.value.statut!==null && this.FormGroup5.value.enCours!==null && 
+                              this.FormGroup5.value.cloturee!==null){
                                 this.anomalieService.postAnomalie(this.FormGroup5.value)
                                   .subscribe({
                                     next:(_res5)=>{
