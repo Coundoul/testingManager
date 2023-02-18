@@ -6,6 +6,7 @@ import { ManagerComponent } from './entities/manager/manager.component';
 import { TesteurComponent } from './entities/testeur/testeur.component';
 import { PerimetreComponent } from './entities/perimetre/perimetre.component';
 import { DetailReleaseComponent } from './entities/perimetre/detail/detail-release/detail-release.component';
+import { ScenarioTestDialogComponent } from './entities/perimetre/detail/dialogs/scenarioTest/scenario-test-dialog/scenario-test-dialog.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
     path:':id/view', 
     component:DetailReleaseComponent
   },
+  {
+    path:':id/:resultat/detailCasTest',
+    component: ScenarioTestDialogComponent
+  }
 
 ];
 

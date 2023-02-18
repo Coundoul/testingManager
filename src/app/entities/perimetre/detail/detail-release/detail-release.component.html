@@ -64,7 +64,11 @@
                        <!-- Nom Column -->
                        <ng-container matColumnDef="scenario">
                         <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color:bisque;"> Scénario Test </th>
-                        <td mat-cell *matCellDef="let row"> </td>
+                        <td mat-cell *matCellDef="let row">
+                          <button mat-icon-button [routerLink]="['' , row?.casDeTest?.refCasTest, row?.casDeTest?.resultat, 'detailCasTest']">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        </td>
                       </ng-container>
 
                       <ng-container matColumnDef="cloture">

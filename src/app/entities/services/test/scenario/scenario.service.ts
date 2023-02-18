@@ -9,18 +9,23 @@ export class ScenarioService {
   constructor(private http: HttpClient) { }
 
   postScenario(data : any){
-    return this.http.post<any>("http://localhost:9092/casTestManager", data);
+    return this.http.post<any>("http://localhost:9092/scenarioManager", data);
   }
 
   getAllScenario(){
-    return this.http.get<any>("http://localhost:9092/casTestManager");
+    return this.http.get<any>("http://localhost:9092/scenarioManager");
+  }
+
+  getAllScenarioForCasTest(id: number){
+    return this.http.get<any>("http://localhost:9092/scenarioManager/casTest/"+id);
   }
 
   putScenario(data : any, id : number){
-    return this.http.put<any>("http://localhost:9092/casTestManager/"+id, data);
+    return this.http.put<any>("http://localhost:9092/scenarioManager/"+id, data);
   }
 
   deleteScenario(id : number){
-    return this.http.delete<any>("http://localhost:9092/casTestManager/"+id);
+    return this.http.delete<any>("http://localhost:9092/scenarioManager/"+id);
   }
+  
 }
