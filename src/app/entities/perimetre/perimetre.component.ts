@@ -24,6 +24,8 @@ export class PerimetreComponent implements OnInit{
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  tickets!: [];
+
   constructor(private anomalieService: AnomalieService, private ticketService: TicketService, private releaseService: ReleaseService,
     private casTestService: CasService, public dialog: MatDialog, private scenarioService: ScenarioService){}
 
@@ -61,8 +63,27 @@ export class PerimetreComponent implements OnInit{
     })
   }
 
-  detailPerimetre(id: number){
-    // this.router.navigate([])
+
+  deleteRelease(refRelease: number){
+    this.ticketService.getAllTicketForRelease(refRelease)
+    .subscribe({
+      next:(res) =>{
+        if(res){
+          res.array.forEach((element: number) =>  {
+            this.ticketService.deleteTicket(element);
+          });
+          this.releaseService.deleteRelease(refRelease)
+          .subscribe({
+            next:(value) =>{
+                this.getAllPerimetre();
+            },
+            error:()=>{
+              alert("Impossible de supprimer les elements");
+            }
+          })
+        }
+      }
+    })
   }
 
   editDialog(row : any) {

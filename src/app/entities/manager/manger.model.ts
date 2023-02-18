@@ -7,6 +7,14 @@ export interface ITesteur {
     prenom?: string;
     nom?: string;
 }
+export interface IAnomalie{
+  refAnomalie?: number;
+  cloturee?: string;
+  criticite?: string;
+  en_cours?: string;
+  priorite?: string;
+  statut?: string;
+}
 
 export interface IRelease {
   refRelease?: number;
@@ -15,12 +23,20 @@ export interface IRelease {
   dateReelle?: Date;
 }
 
+export interface ICasDeTest{
+  refCasTest?: number;
+  resultat?: string;
+}
 export interface ITicket {
   refTicket?: number;
   titre?: string;
   type?: Type;
   testeur?: ITesteur | null;
+  release?: IRelease | null;
+  anomalies?: IAnomalie | null;
+  casDeTest?: ICasDeTest | null;
 }
+
 
 
 
@@ -43,9 +59,25 @@ export function getReleaseIdentifier(release: IRelease): number | undefined {
 }
 
 export class Ticket implements ITicket {
-  constructor(public refTicket?: number, public titre?: string, public type?: Type, public Testeur?: ITesteur | null) {}
+  constructor(public refTicket?: number, public titre?: string, public type?: Type, public testeur?: ITesteur | null, public anomalies?: IAnomalie | null) {}
 }
   
 export function getTicketIdentifier(ticket: ITicket): number | undefined {
   return ticket.refTicket;
+}
+
+export class Anomalie implements IAnomalie {
+  constructor(public refAnomalie?: number, public cloturee?: string, public criticite?: string, public en_cours?: string, public priorite?: string, public statut?: string) {}
+}
+  
+export function getAnomalieIdentifier(anomalie: IAnomalie): number | undefined {
+  return anomalie.refAnomalie;
+}
+
+export class CasDeTest implements ICasDeTest {
+  constructor(public refCasTest?: number, public resultat?: string) {}
+}
+  
+export function getRefCasDeTestIdentifier(casDeTest: ICasDeTest): number | undefined {
+  return casDeTest.refCasTest;
 }

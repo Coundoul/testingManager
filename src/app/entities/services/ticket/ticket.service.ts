@@ -16,6 +16,10 @@ export class TicketService {
     return this.http.get<any>("http://localhost:9092/ticketManager");
   }
 
+  getAllTicketForRelease(id:number){
+    return this.http.get<any>("http://localhost:9092/ticketManager/ticketRelease/"+id);
+  }
+
   getTicket(id:number){
     return this.http.get<any>("http://localhost:9092/ticketManager/"+id);
   }

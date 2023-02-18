@@ -9,6 +9,9 @@ import { ReleaseService } from 'src/app/entities/services/release/release.servic
 import { CasService } from 'src/app/entities/services/test/cas/cas.service';
 import { ScenarioService } from 'src/app/entities/services/test/scenario/scenario.service';
 import { TicketService } from 'src/app/entities/services/ticket/ticket.service';
+import { AnomalieDialogComponent } from '../dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
+import { CasTestDialogComponent } from '../dialogs/casTest/cas-test-dialog/cas-test-dialog.component';
+import { TicketDialogComponent } from '../dialogs/ticket/ticket-dialog/ticket-dialog.component';
 
 @Component({
   selector: 'app-detail-release',
@@ -18,15 +21,16 @@ import { TicketService } from 'src/app/entities/services/ticket/ticket.service';
 export class DetailReleaseComponent implements OnInit{
 
   id!: number;
+  detail: any;
 
-  displayedColumnsTicket: string[] = ['id', 'refTicket', 'titreTicket', 'typeTicket','Testeur', 'action'];
+  displayedColumnsTicket: string[] = ['titre', 'type', 'testeur','casTest', 'scenario', 'cloture','criticite','cours','priorite', 'statut', 'action'];
   dataSourceTicket!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginatorTicket!: MatPaginator;
   @ViewChild(MatSort) sortTicket!: MatSort;
 
 
-  displayedColumnsAnomalie: string[] = ['id', 'refAnomalie', 'titreAnomalie', 'criticiteAnomalie','motifAnomalie','statutAnomalie','prioriteAnomalie', 'action'];
+  displayedColumnsAnomalie: string[] = ['id', 'refAnomalie', 'titreAnomalie', 'criticiteAnomalie','motifAnomalie','statutAnomalie','prioriteAnomalie','action'];
   dataSourceAnomalie!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginatorAnomalie!: MatPaginator;
@@ -41,6 +45,7 @@ export class DetailReleaseComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(() => {
       this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+      this.detail = this.activatedRoute.snapshot.paramMap.get('row');
     });
 
     if(this.id){
@@ -50,7 +55,7 @@ export class DetailReleaseComponent implements OnInit{
 
   // Partie Ticket
   getAllTicket(id:number){
-    this.ticketService.getTicket(id)
+    this.ticketService.getAllTicketForRelease(id)
     .subscribe({
       next: (res) =>{
         this.dataSourceTicket = new MatTableDataSource(res);
@@ -75,12 +80,53 @@ export class DetailReleaseComponent implements OnInit{
     }
   }
 
+  editDialogTicket(row: any){ 
+    // this.dialog.open(DialogEditComponent, {
+    //   width: '50%',
+    //   data: row
+    // }).afterClosed().subscribe(()=>{
+    //     this.getAllPerimetre();
+      
+    // });
+  }
+
+  ajoutDialogTicket(){ 
+    this.dialog.open(TicketDialogComponent, {
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+  ajoutDialogAnomalie(){ 
+    this.dialog.open(AnomalieDialogComponent, {
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+  ajoutDialogaCasTest(){ 
+    this.dialog.open(CasTestDialogComponent, {
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+
   deleteTicket(id: number){
     this.ticketService.deleteTicket(id)
     .subscribe({
       next:(res) =>{
           this.getAllTicket(this.id);
       },
+      error:()=>{
+        this.getAllTicket(this.id);
+      }
     })
   }
 

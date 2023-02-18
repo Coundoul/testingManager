@@ -35,10 +35,11 @@ export class ManagerComponent implements OnInit{
   });
 
   FormGroup2 = this._formBuilder.group({
-    titre: ['', Validators.required],
-    type: ['', Validators.required],
+    titre: [null, Validators.required],
+    type: [null, Validators.required],
     testeur: new FormControl(null),
-    release: []
+    release: [],
+    anomalies:[]
   });
 
   FormGroup3 = this._formBuilder.group({
@@ -52,12 +53,11 @@ export class ManagerComponent implements OnInit{
 
   });
   FormGroup5 = this._formBuilder.group({
+    cloturee: [null, Validators.required],
     criticite: [null, Validators.required],
+    enCours: [null, Validators.required],
     priorite: [null, Validators.required],
     statut: [null, Validators.required],
-    enCours: [null, Validators.required],
-    cloturee: [null, Validators.required],
-    ticket:[]
   });
   
   FormGroup6 = this._formBuilder.group({
@@ -111,76 +111,114 @@ export class ManagerComponent implements OnInit{
         this.releaseService.postRelease(this.FormGroup1.value)
         .subscribe({
           next:(res1)=>{
-            if(res1){
-              this.FormGroup2.value.release=res1;
-              this.ticketService.postTicket(this.FormGroup2.value)
-              .subscribe({
-                next:(res2)=>{
-                  this.FormGroup3.value.resutat=this.FormGroup6.value.resutat;
-                  this.FormGroup3.value.ticket=res2;
-                  if(this.FormGroup3.value.resutat!==null){
-                    this.casTestService.postCasTest(this.FormGroup3.value)
+            if (this.FormGroup2.value.titre!==null || this.FormGroup2.value.type!==null){
+              if(this.FormGroup5.value.criticite!==null || this.FormGroup5.value.priorite!==null ||
+                this.FormGroup5.value.statut!==null || this.FormGroup5.value.enCours!==null || 
+                this.FormGroup5.value.cloturee!==null){
+                  this.anomalieService.postAnomalie(this.FormGroup5.value)
                     .subscribe({
-                      next:(res3)=>{
-                        this.FormGroup4.value.scenario=this.FormGroup6.value.scenario;
-                        this.FormGroup4.value.casTest=res3;
-                        if(this.FormGroup4.value!==null && this.FormGroup4.value!==null){
-                          this.scenarioService.postScenario(this.FormGroup4.value)
-                          .subscribe({
-                            next:(_res4)=>{
-                            this.FormGroup5.value.ticket=res2;
-                            if(this.FormGroup5.value.criticite!==null && this.FormGroup5.value.priorite!==null &&
-                              this.FormGroup5.value.statut!==null && this.FormGroup5.value.enCours!==null && 
-                              this.FormGroup5.value.cloturee!==null){
-                                this.anomalieService.postAnomalie(this.FormGroup5.value)
-                                  .subscribe({
-                                    next:(_res5)=>{
-                                      this.FormGroup1.reset();
-                                      this.FormGroup2.reset();
-                                      this.FormGroup3.reset();
-                                      this.FormGroup4.reset();
-                                      this.FormGroup5.reset();
-                                      this.router.navigate(['/perimetre'])
-                                    },
-                                    error:()=>{
-                                        alert("Impossible d'ajouter le anomalie seul")
-                                      }
-                                  })
-                              }else{
-                                this.FormGroup1.reset();
-                                this.FormGroup2.reset();
-                                this.FormGroup3.reset();
-                                this.FormGroup4.reset();
-                                this.FormGroup5.reset();
-                                this.router.navigate(['/perimetre'])
-                              }
-                            }
-                          })
-                        }else{
-                          this.FormGroup1.reset();
-                          this.FormGroup2.reset();
-                          this.FormGroup3.reset();
-                          this.FormGroup4.reset();
-                          this.FormGroup5.reset();
-                          this.router.navigate(['/perimetre'])
+                      next:(res5)=>{
+                        this.FormGroup2.value.anomalies=res5;
+                        this.FormGroup2.value.release=res1;
+                        this.ticketService.postTicket(this.FormGroup2.value)
+                        .subscribe({
+                          next:(value) =>{
+                            this.FormGroup1.reset();
+                            this.FormGroup2.reset();
+                            this.FormGroup3.reset();
+                            this.FormGroup4.reset();
+                            this.FormGroup5.reset();
+                            this.router.navigate(['/perimetre'])
+                          },
+                        })
+                      },
+                      error:()=>{
+                          alert("Impossible d'ajouter le anomalie seul")
                         }
-                      }
                     })
-                  }
-                  else{
-                    this.FormGroup1.reset();
-                    this.FormGroup2.reset();
-                    this.FormGroup3.reset();
-                    this.FormGroup4.reset();
-                    this.FormGroup5.reset();
-                    this.router.navigate(['/perimetre'])
-                    }
-                },
-                error:()=>{
-                  alert("Impossible d'ajouter le ticket seul")
+                }else{
+                  this.FormGroup2.value.release=res1;
+                  this.ticketService.postTicket(this.FormGroup2.value)
+                  .subscribe({
+                    next:(value) =>{
+                      
+                    },error:(err) =>{
+                        alert("Impossible d'envover les donneées du ticket au serveur ");
+                    },
+                  })
                 }
-              })
+            }else{
+              this.FormGroup1.reset();
+              this.FormGroup2.reset();
+              this.FormGroup3.reset();
+              this.FormGroup4.reset();
+              this.FormGroup5.reset();
+              this.router.navigate(['/perimetre'])
             }
+
+            // if(res1){
+            //   this.FormGroup2.value.release=res1;
+            //   this.ticketService.postTicket(this.FormGroup2.value)
+            //   .subscribe({
+            //     next:(res2)=>{
+            //       this.FormGroup3.value.resutat=this.FormGroup6.value.resutat;
+            //       this.FormGroup3.value.ticket=res2;
+            //       if(this.FormGroup3.value.resutat!==null){
+            //         this.casTestService.postCasTest(this.FormGroup3.value)
+            //         .subscribe({
+            //           next:(res3)=>{
+            //             this.FormGroup4.value.scenario=this.FormGroup6.value.scenario;
+            //             this.FormGroup4.value.casTest=res3;
+            //             if(this.FormGroup4.value!==null && this.FormGroup4.value!==null){
+            //               this.scenarioService.postScenario(this.FormGroup4.value)
+            //               .subscribe({
+            //                 next:(_res4)=>{
+            //                 if(this.FormGroup5.value.criticite!==null && this.FormGroup5.value.priorite!==null &&
+            //                   this.FormGroup5.value.statut!==null && this.FormGroup5.value.en_cours!==null && 
+            //                   this.FormGroup5.value.cloturee!==null){
+            //                     this.anomalieService.postAnomalie(this.FormGroup5.value)
+            //                       .subscribe({
+            //                         next:(_res5)=>{
+            //                           this.FormGroup1.reset();
+            //                           this.FormGroup2.reset();
+            //                           this.FormGroup3.reset();
+            //                           this.FormGroup4.reset();
+            //                           this.FormGroup5.reset();
+            //                           this.router.navigate(['/perimetre'])
+            //                         },
+            //                         error:()=>{
+            //                             alert("Impossible d'ajouter le anomalie seul")
+            //                           }
+            //                       })
+            //                   }else{
+            //                     this.FormGroup1.reset();
+            //                     this.FormGroup2.reset();
+            //                     this.FormGroup3.reset();
+            //                     this.FormGroup4.reset();
+            //                     this.FormGroup5.reset();
+            //                     this.router.navigate(['/perimetre'])
+            //                   }
+            //                 }
+            //               })
+            //             }else{
+            //               this.FormGroup1.reset();
+            //               this.FormGroup2.reset();
+            //               this.FormGroup3.reset();
+            //               this.FormGroup4.reset();
+            //               this.FormGroup5.reset();
+            //               this.router.navigate(['/perimetre'])
+            //             }
+            //           }
+            //         })
+            //       }
+            //       else{
+            //         }
+            //     },
+            //     error:()=>{
+            //       alert("Impossible d'ajouter le ticket seul")
+            //     }
+            //   })
+            // }
           },
           error:()=>{
             alert("Impossible d'ajouter un nouveau release")

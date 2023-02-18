@@ -53,7 +53,7 @@ import { TicketDialogComponent } from './entities/perimetre/detail/dialogs/ticke
 import { CasTestDialogComponent } from './entities/perimetre/detail/dialogs/casTest/cas-test-dialog/cas-test-dialog.component';
 import { ScenarioTestDialogComponent } from './entities/perimetre/detail/dialogs/scenarioTest/scenario-test-dialog/scenario-test-dialog.component';
 import { AnomalieDialogComponent } from './entities/perimetre/detail/dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
-
+import {MatTreeModule} from '@angular/material/tree';
 
 
 @NgModule({
@@ -117,7 +117,8 @@ import { AnomalieDialogComponent } from './entities/perimetre/detail/dialogs/ano
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTreeModule
   ],
   bootstrap: [AppComponent]
 })
